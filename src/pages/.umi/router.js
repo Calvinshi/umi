@@ -48,6 +48,10 @@ const routes = [
     ],
   },
   {
+    component: require('../404').default,
+    exact: true,
+  },
+  {
     component: () =>
       React.createElement(
         require('/Users/myapple/.config/yarn/global/node_modules/umi-build-dev/lib/plugins/404/NotFound.js')
