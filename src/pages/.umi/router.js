@@ -3,26 +3,50 @@ import { Router as DefaultRouter, Route, Switch } from 'react-router-dom';
 import dynamic from 'umi/dynamic';
 import renderRoutes from 'umi/lib/renderRoutes';
 import history from '@tmp/history';
+import { routerRedux } from 'dva';
 
-const Router = DefaultRouter;
+const Router = routerRedux.ConnectedRouter;
 
 const routes = [
   {
-    path: '/',
+    path: '/login',
+    component: require('../login').default,
     exact: true,
-    component: require('../index.js').default,
   },
   {
-    path: '/users',
-    exact: true,
-    component: require('../users.js').default,
+    path: '/',
+    component: require('../../layouts').default,
+    routes: [
+      {
+        path: '/about',
+        component: require('../about').default,
+        exact: true,
+      },
+      {
+        path: '/users',
+        component: require('../users').default,
+        exact: true,
+      },
+      {
+        component: require('../404').default,
+        exact: true,
+      },
+      {
+        component: () =>
+          React.createElement(
+            require('/Users/myapple/.config/yarn/global/node_modules/umi-build-dev/lib/plugins/404/NotFound.js')
+              .default,
+            { pagesPath: 'src/pages', hasRoutesInConfig: true },
+          ),
+      },
+    ],
   },
   {
     component: () =>
       React.createElement(
         require('/Users/myapple/.config/yarn/global/node_modules/umi-build-dev/lib/plugins/404/NotFound.js')
           .default,
-        { pagesPath: 'src/pages', hasRoutesInConfig: false },
+        { pagesPath: 'src/pages', hasRoutesInConfig: true },
       ),
   },
 ];

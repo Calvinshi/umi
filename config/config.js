@@ -16,8 +16,12 @@ export default {
             path:"/",
             component:"../layouts",
             routes:[
-                {path:"/",component:"./goods/index"},
-
+                // {path:"/",component:"./goods/index"},
+                {path:"/about",component:"./about"},
+                {path:"/users",component:"./users"},
+                {
+                    component: "./404"
+                }
             ]
         }
     ]
