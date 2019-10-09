@@ -20,7 +20,7 @@ export function _onCreate() {
     app.use(plugin);
   });
   
-  
+  app.model({ namespace: 'goods', ...(require('/Users/myapple/Desktop/GitHub/umi/src/pages/goods/models/goods.js').default) });
   return app;
 }
 

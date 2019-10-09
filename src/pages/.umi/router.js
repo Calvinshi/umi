@@ -18,8 +18,14 @@ const routes = [
     component: require('../../layouts').default,
     routes: [
       {
+        path: '/',
+        component: require('../goods/index').default,
+        exact: true,
+      },
+      {
         path: '/about',
         component: require('../about').default,
+        Routes: [require('../../../routes/PrivateRoute.js').default],
         exact: true,
       },
       {

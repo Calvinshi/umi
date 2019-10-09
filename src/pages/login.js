@@ -20,7 +20,7 @@ export default class extends Component {
           ></UserName>
           <Password 
           name="password"
-          placeholder="inpur your password wrod"
+          placeholder="inpur your password wrod "
           ></Password>
           <Submit> Login </Submit>
         </Login>

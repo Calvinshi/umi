@@ -15,10 +15,16 @@ export default {
         {
             path:"/",
             component:"../layouts",
-            routes:[
-                // {path:"/",component:"./goods/index"},
-                {path:"/about",component:"./about"},
-                {path:"/users",component:"./users"},
+            routes:[//prop.children
+                {path:"/",component:"./goods/index"},
+                {
+                    path:"/about",
+                    component:"./about",
+                    Routes:["./routes/PrivateRoute.js"]
+                },
+                {
+                    path:"/users",
+                    component:"./users"},
                 {
                     component: "./404"
                 }
