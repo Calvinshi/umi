@@ -26,12 +26,18 @@ class Goods extends Component {
     componentDidMount() {
         this.props.getList()
     }
+    componentWillReceiveProps(props) {
+        if (props.tags.length) {
+          this.tagSelectChange(props.tags, props.courses);
+        }
+      }
     
-    tagSelectChange(tags, courses = this.props.courses){
-        const displayCourses = tags.floatMap(tag => courses[tag]);
+    tagSelectChange = (tags, courses = this.props.courses)=>{
+        const displayCourses = tags.flatMap(tag => courses[tag]);
         this.setState({displayCourses})
     }
     render(){
+        console.log(this.state.displayCourse)
         if (this.props.loading.models.goods) {
             return <div>Loading</div>
 
@@ -47,7 +53,45 @@ class Goods extends Component {
                         );
                     })}
                 </TagSelect>
+                <Row type = "flex" justify = "start">
+                    
+                    {
+                        this.state.displayCourses.map((item,index)=>{
+                            return (
+                                <Col key = {index} style = {{padding: 10}} span = {6}>
+                                    {item.name ?(
+                                        <Card 
+                                        hoverable
+                                        title = {item.name}
+                                        cover = {<img src={"/course/"+item.img} />}
+                                        extra={
+                                            <Icon
+                                              onClick={e => this.addCart(e, item)}
+                                              type="shopping-cart"
+                                              style={{ fontSize: 18 }}
+                                            />
+                                          }
+                                        >
+                                            <Card.Meta
+                                                description={
+                                                    <div>
+                                                    <span>￥{item.price}</span>
+                                                    <span style={{ float: "right" }}>
+                                                        <Icon type="user" /> {item.solded}
+                                                    </span>
+                                                    </div>
+                                                }
+                                                />
+                                        </Card>
+                                    ) : (<Skeleton active = {true}></Skeleton>)}
+                                </Col>
+                            )
+                        })
+                    }
+
+                </Row>
             </div>
+            
         )
     }
 }

@@ -2,6 +2,7 @@ import axios from 'axios'
 
 function getGoods(){
     return axios.get('/api/goods').then(({data}) => {
+        console.log(data)
         return {
             courses : data.courseData.data,
             tags: data.courseData.tags
