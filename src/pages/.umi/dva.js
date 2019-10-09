@@ -20,7 +20,8 @@ export function _onCreate() {
     app.use(plugin);
   });
   
-  app.model({ namespace: 'goods', ...(require('/Users/myapple/Desktop/GitHub/umi/src/pages/goods/models/goods.js').default) });
+  app.model({ namespace: 'cart', ...(require('/Users/myapple/Desktop/GitHub/umi/src/models/cart.js').default) });
+app.model({ namespace: 'goods', ...(require('/Users/myapple/Desktop/GitHub/umi/src/pages/goods/models/goods.js').default) });
   return app;
 }
 

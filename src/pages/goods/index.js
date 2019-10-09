@@ -12,6 +12,10 @@ import { TagSelect } from "ant-design-pro";
     {
         getList:() => ({
             type: "goods/getList"
+        }),
+        addCart: (payload)=> ({
+            type: "cart/addCart",
+            payload
         })
     }
 )
@@ -26,22 +30,29 @@ class Goods extends Component {
     componentDidMount() {
         this.props.getList()
     }
+    //need optimization 
     componentWillReceiveProps(props) {
         if (props.tags.length) {
           this.tagSelectChange(props.tags, props.courses);
         }
       }
-    
+    //need send the parameters in function 
     tagSelectChange = (tags, courses = this.props.courses)=>{
         const displayCourses = tags.flatMap(tag => courses[tag]);
         this.setState({displayCourses})
     }
+
+    addCart(e,item){
+        console.log(item)
+        e.stopPropagation();
+        this.props.addCart(item);
+    }
     render(){
         console.log(this.state.displayCourse)
-        if (this.props.loading.models.goods) {
-            return <div>Loading</div>
+        // if (this.props.loading.models.goods) {
+        //     return <div>Loading</div>
 
-        }
+        // }
         return (
             <div>
                 <TagSelect onChange={this.tagSelectChange}>
@@ -59,7 +70,7 @@ class Goods extends Component {
                         this.state.displayCourses.map((item,index)=>{
                             return (
                                 <Col key = {index} style = {{padding: 10}} span = {6}>
-                                    {item.name ?(
+                                    {item.id ?(
                                         <Card 
                                         hoverable
                                         title = {item.name}

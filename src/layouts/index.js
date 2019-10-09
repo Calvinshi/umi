@@ -7,17 +7,18 @@ const { Header, Footer, Content } = Layout;
 
 export default connect(state => ({
   // 连接购物车状态
-//   count: state.cart.length,
-//   cart: state.cart
+  count: state.cart.length,
+  cart: state.cart
 }))(function(props) {
+    console.log(props)
   const selectedKeys = [props.location.pathname];
   const menu = (
     <Menu>
-      {/* {props.cart.map((item, index) => (
+      {props.cart.map((item, index) => (
         <Menu.Item key={index}>
           {item.name}×{item.count} <span>￥{item.count * item.price}</span>
         </Menu.Item>
-      ))} */}
+      ))}
     </Menu>
   );
   return (
@@ -45,13 +46,13 @@ export default connect(state => ({
             <Link to="/about">关于</Link>
           </Menu.Item>
         </Menu>
-        {/* <Dropdown overlay={menu} placement="bottomRight">
+        <Dropdown overlay={menu} placement="bottomRight">
           <div style={{ float: "right" }}>
             <Icon type="shopping-cart" style={{ fontSize: 18 }} />
             <span>我的购物车</span>
             <Badge count={props.count} offset={[-4, -18]} />
           </div>
-        </Dropdown> */}
+        </Dropdown>
       </Header>
       {/* 内容 */}
       <Content className={styles.content}>
